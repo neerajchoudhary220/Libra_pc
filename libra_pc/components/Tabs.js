@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Price from "./Price";
 import Dboperation from "./Dboperation";
+import LivePriceList from "./api/LivePriceList";
 
 function PriceCalculator() {
     return (
@@ -13,6 +14,12 @@ function PriceCalculator() {
 function PriceList() {
     return (
         <Dboperation></Dboperation>
+    )
+}
+
+function LiveData() {
+    return (
+        <LivePriceList></LivePriceList>
     )
 }
 
@@ -30,12 +37,16 @@ const Tabs = () => {
                         iconName = focused ? require("./icons/calculator_active.png") : require("./icons/calculator.png");
 
                     }
+                    else if (route.name == 'livePriceData') {
+                        iconName = focused ? require("./icons/list_active.png") : require("./icons/list.png")
+
+                    }
                     else if (route.name == 'priceList') {
                         iconName = focused ? require("./icons/list_active.png") : require("./icons/list.png")
 
 
                     }
-                    
+
                     return <Image source={iconName} style={{ width: 20, height: 20 }} />
 
                 },
@@ -46,6 +57,11 @@ const Tabs = () => {
                     title: 'Price Calculator',
                     headerShown: false,
                 }} />
+                <Tab.Screen name="livePriceData" component={LiveData}
+                    options={{
+                        title: "Live Price",
+                        headerShown: false,
+                    }} />
                 <Tab.Screen name="priceList" component={PriceList} options={{
                     title: 'Price List',
                     headerShown: false
