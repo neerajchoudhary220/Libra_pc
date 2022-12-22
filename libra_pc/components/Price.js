@@ -16,22 +16,25 @@ function Price(props) {
     const [unit, setUnit] = useState('Gm');
     const [SelectData, SetSelectData] = useState();
     const [DATA, setData] = useState([]);
+    const [ClickBtnDisableColor, SetClickBtnDisableColor] = useState(StaticData().Disabled_color);
+    const [ClickBtnDisable, SetClickBtnDisable] = useState(true);
 
+    const ClickBtnDisableTrue = () => {
+        SetClickBtnDisableColor(StaticData().Disabled_color);
+        SetClickBtnDisable(true);
+    }
+    const ClickBtnDisableFalse = () => {
+        SetClickBtnDisableColor(StaticData().AppColor);
+        SetClickBtnDisable(false);
+    }
     useEffect(() => {
         PickerData();
-        {
-            if (DATA.length > 0) {
-                setWeight(1);
-                setPrice(price => DATA[0].price);
-            }
-        }
+
     }, []);
     const selectBtn = (id, IndexVal) => {
         var index_val = 0;
         if (IndexVal != 0) {
             index_val = IndexVal - 1;
-
-          ;
             SetSelectData(id);
             var SelectedPrice = DATA[index_val].price;
             setPrice(SelectedPrice);
@@ -39,8 +42,10 @@ function Price(props) {
             rsTxt.clear();
             wtTxt.clear();
             setUnit('Gm');
+            ClickBtnDisableTrue();
+
         }
-       
+
     }
     const PickerData = () => {
         db.transaction((tx) => {
@@ -55,7 +60,16 @@ function Price(props) {
         });
     }
     PickerData();
+    const ClickDisableBtnFunction=()=>{
+        if(rs!=undefined && weightRs!=undefined){
+            if(rs.length>0 || weightRs.length>0){
+               ClickBtnDisableFalse();
+            }else{
+                ClickBtnDisableTrue();
 
+            }
+        }
+    }
 
     calculation = () => {
 
@@ -81,6 +95,23 @@ function Price(props) {
 
 
     }
+
+    const priceInput = (val) => {
+        setPrice(val);
+    }
+    const WeightInput = (val) => {
+        setWeight(val);
+    }
+    const RsInput = (val) => {
+        setRs(val);
+        ClickDisableBtnFunction();
+        
+    }
+    const WeightRsInput=(val)=>{
+        setWeightRs(val);
+        ClickDisableBtnFunction();
+    }
+   
     const rst = () => {
         priceTxt.clear();
         weightTxt.clear();
@@ -90,15 +121,20 @@ function Price(props) {
         setWeight("");
         setPrice("");
         SetSelectData("");
+        ClickBtnDisableTrue();
 
     }
     const clearWeightRs = () => {
-        setWeightRs();
+        setWeightRs("");
         wtTxt.clear();
+        ClickDisableBtnFunction();
+
     }
     const clearRs = () => {
         rsTxt.clear();
-        setRs();
+        setRs("");
+        ClickDisableBtnFunction();
+
     }
     const SelectedData = () => {
         // if (DATA.length <= 0) {
@@ -124,7 +160,7 @@ function Price(props) {
                     selectedValue={SelectData}
                     onValueChange={(val, IndexVal) => { selectBtn(val, IndexVal) }}
                 >
-                    <Picker.Item key={0}  label={"Select"} style={{ fontFamily: StaticData().AppFontFamily }} />
+                    <Picker.Item key={0} label={"Select"} style={{ fontFamily: StaticData().AppFontFamily }} />
                     {SelectedData()}
 
                 </Picker>
@@ -135,14 +171,14 @@ function Price(props) {
                 <View style={Styles('').inputGroup}>
                     <Text style={Styles('').label}>Price</Text>
                     <TextInput style={Styles('').inputField} keyboardType='numeric' placeholder="0" ref={val => { priceTxt = val }}
-                        onChangeText={value => { setPrice(value) }}>{price}</TextInput>
+                        onChangeText={priceInput}>{price}</TextInput>
                 </View>
                 <View style={[Styles('').inputGroup, { marginLeft: 2 }]}>
                     <Text style={Styles('').label}>
                         Weight (Kg)
                     </Text>
                     <TextInput style={Styles('').inputField} keyboardType="numeric" placeholder="0" ref={val => { weightTxt = val }}
-                        onChangeText={value => { setWeight(value) }}>{weight}</TextInput>
+                        onChangeText={WeightInput}>{weight}</TextInput>
                 </View>
 
 
@@ -153,7 +189,7 @@ function Price(props) {
                 <View style={Styles('').inputGroup}>
                     <Text style={[Styles('').label, { color: 'red' }]}>Rs</Text>
                     <TextInput style={Styles('').inputField} keyboardType='numeric' placeholder="0"
-                        ref={val => { rsTxt = val }} onChangeText={value => { setRs(value) }}
+                        ref={val => { rsTxt = val }} onChangeText={RsInput}
                         onKeyPress={clearWeightRs} onPressIn={clearWeightRs}>{rs}</TextInput>
                 </View>
 
@@ -162,7 +198,7 @@ function Price(props) {
                     <Text style={[Styles('').label, { color: 'red' }]}>Weight ({unit})</Text>
                     <TextInput style={Styles('').inputField} keyboardType='numeric' placeholder="0"
                         onPressIn={clearRs} onKeyPress={clearRs}
-                        ref={val => { wtTxt = val }} onChangeText={value => { setWeightRs(value) }}>{weightRs}</TextInput>
+                        ref={val => { wtTxt = val }} onChangeText={WeightRsInput}>{weightRs}</TextInput>
 
                 </View>
             </View>
@@ -171,7 +207,7 @@ function Price(props) {
             {/* button */}
             <View style={[Styles('').container, { flexDirection: 'row', alignSelf: 'center' }]}>
 
-                <Buttons btnColor={StaticData().AppColor} functionName={calculation} btnName="Click"></Buttons>
+                <Buttons btnColor={ClickBtnDisableColor} functionName={calculation} btnName="Click" btnDisable={ClickBtnDisable}></Buttons>
                 <Buttons btnColor='red' functionName={rst} btnName='Reset'></Buttons>
             </View>
 
