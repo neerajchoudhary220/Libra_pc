@@ -60,15 +60,15 @@ function Price(props) {
         });
     }
     PickerData();
-    const ClickDisableBtnFunction=()=>{
-        if(rs!=undefined && weightRs!=undefined){
-            if(rs.length>0 || weightRs.length>0){
-               ClickBtnDisableFalse();
-            }else{
-                ClickBtnDisableTrue();
+    const ClickDisableBtnFunction = (val) => {
+        if (price > 0 && weight > 0 && val > 0) {
+            ClickBtnDisableFalse();
 
-            }
+        } else {
+            ClickBtnDisableTrue();
+
         }
+
     }
 
     calculation = () => {
@@ -104,14 +104,20 @@ function Price(props) {
     }
     const RsInput = (val) => {
         setRs(val);
-        ClickDisableBtnFunction();
-        
+        setRs((rsInputVal) => {
+            ClickDisableBtnFunction(rsInputVal);
+            return rsInputVal;
+        });
+
     }
-    const WeightRsInput=(val)=>{
+    const WeightRsInput = (val) => {
         setWeightRs(val);
-        ClickDisableBtnFunction();
+        setWeightRs((weightRsVal) => {
+            ClickDisableBtnFunction(weightRsVal);
+            return weightRsVal;
+        })
     }
-   
+
     const rst = () => {
         priceTxt.clear();
         weightTxt.clear();
@@ -127,14 +133,31 @@ function Price(props) {
     const clearWeightRs = () => {
         setWeightRs("");
         wtTxt.clear();
-        ClickDisableBtnFunction();
 
     }
     const clearRs = () => {
         rsTxt.clear();
         setRs("");
-        ClickDisableBtnFunction();
+        // ClickDisableBtnFunction();
 
+
+    }
+    const WeightRsPressIn = () => {
+        rsTxt.clear();
+        setRs("");
+        setRs((state) => {
+            ClickDisableBtnFunction(state);
+            return state;
+        });
+
+    }
+    const RsPressIn = () => {
+        setWeightRs("");
+        wtTxt.clear();
+        setWeightRs((state) => {
+            ClickDisableBtnFunction(state);
+            return state;
+        });
     }
     const SelectedData = () => {
         // if (DATA.length <= 0) {
@@ -190,14 +213,14 @@ function Price(props) {
                     <Text style={[Styles('').label, { color: 'red' }]}>Rs</Text>
                     <TextInput style={Styles('').inputField} keyboardType='numeric' placeholder="0"
                         ref={val => { rsTxt = val }} onChangeText={RsInput}
-                        onKeyPress={clearWeightRs} onPressIn={clearWeightRs}>{rs}</TextInput>
+                        onKeyPress={clearWeightRs} onPressIn={RsPressIn}>{rs}</TextInput>
                 </View>
 
                 {/* weight */}
                 <View style={[Styles('').inputGroup, { marginLeft: 2 }]}>
                     <Text style={[Styles('').label, { color: 'red' }]}>Weight ({unit})</Text>
                     <TextInput style={Styles('').inputField} keyboardType='numeric' placeholder="0"
-                        onPressIn={clearRs} onKeyPress={clearRs}
+                        onPressIn={WeightRsPressIn} onKeyPress={clearRs}
                         ref={val => { wtTxt = val }} onChangeText={WeightRsInput}>{weightRs}</TextInput>
 
                 </View>
