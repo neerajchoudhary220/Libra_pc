@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Price from "./Price";
 import Dboperation from "./Dboperation";
 import LivePriceList from "./api/LivePriceList";
+import Fetch from "./firebase/Fetch";
 
 function PriceCalculator() {
     return (
@@ -24,6 +25,12 @@ function LiveData() {
 }
 
 
+function FirebaseData() {
+    return (
+        <Fetch></Fetch>
+    )
+}
+
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
@@ -38,6 +45,10 @@ const Tabs = () => {
 
                     }
                     else if (route.name == 'livePriceData') {
+                        iconName = focused ? require("./icons/list_active.png") : require("./icons/list.png")
+
+                    }
+                    else if (route.name == 'firebaseData') {
                         iconName = focused ? require("./icons/list_active.png") : require("./icons/list.png")
 
                     }
@@ -62,6 +73,10 @@ const Tabs = () => {
                         title: "Live Price",
                         headerShown: false,
                     }} />
+                    <Tab.Screen name="firebaseData" component={FirebaseData} options={{
+                        title:'Firebase Data',
+                        headerShown:false
+                    }}/>
                 <Tab.Screen name="priceList" component={PriceList} options={{
                     title: 'Price List',
                     headerShown: false
