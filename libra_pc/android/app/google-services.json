@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "599290396872",
+    "project_id": "libra-7d381",
+    "storage_bucket": "libra-7d381.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599290396872:android:9c15a9b719dd8ed88925fd",
+        "android_client_info": {
+          "package_name": "com.libra_pc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599290396872-qfe87qh78kkbs088fth3d2pn4djl7c7a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.libra_pc",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "599290396872-unej0v2insfcqj71nhpljbvumu1nqa3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw1SbH0-_dvTmazEcN2W0ifuTHfAFN7Ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599290396872-unej0v2insfcqj71nhpljbvumu1nqa3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
