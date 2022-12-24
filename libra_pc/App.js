@@ -29,6 +29,7 @@ function App() {
 
     }, []);
 
-    return (<Tabs></Tabs>);
+    return (
+    <Tabs></Tabs>);
 }
 export default App

@@ -18,7 +18,8 @@ const Popup = (props) => {
     }
 
     return (
-        <Modal isVisible={props.visibility} animationIn='zoomIn' animationOut='zoomOut'>
+        <Modal isVisible={props.visibility} animationIn='zoomIn' animationOut='zoomOut' statusBarTranslucent={true}
+        backdropOpacity={0}>
             <View style={Styles('').model}>
                 <View style={[Styles('').inputContainer, { alignSelf: 'center' }]}>
                     <View>

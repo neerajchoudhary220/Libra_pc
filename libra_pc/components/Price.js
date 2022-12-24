@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, FlatList } from 'react-native';
+import { View, Text, TextInput, FlatList, StatusBar } from 'react-native';
 import { Styles } from "./Styles/Styles";
 import StaticData from "./StaticData";
 import Buttons from "./Buttons";
@@ -170,6 +170,7 @@ function Price(props) {
     }
     return (
         <View style={Styles({ colorName: 'white' }).mainContainer}>
+            <StatusBar backgroundColor={StaticData().AppColor}></StatusBar>
             <View style={Styles('').container}>
                 <Text style={Styles('').title}>{StaticData().AppTittle}</Text>
             </View>

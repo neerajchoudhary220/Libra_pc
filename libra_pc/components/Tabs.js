@@ -6,6 +6,7 @@ import Price from "./Price";
 import Dboperation from "./Dboperation";
 import LivePriceList from "./api/LivePriceList";
 import Fetch from "./firebase/Fetch";
+import NestedNav from "./firebase/NestedNav";
 
 function PriceCalculator() {
     return (
@@ -21,13 +22,13 @@ function PriceList() {
 function LiveData() {
     return (
         <LivePriceList></LivePriceList>
-    )
+    ) 
 }
 
 
 function FirebaseData() {
     return (
-        <Fetch></Fetch>
+        <NestedNav></NestedNav>
     )
 }
 
@@ -48,8 +49,8 @@ const Tabs = () => {
                         iconName = focused ? require("./icons/list_active.png") : require("./icons/list.png")
 
                     }
-                    else if (route.name == 'firebaseData') {
-                        iconName = focused ? require("./icons/list_active.png") : require("./icons/list.png")
+                    else if (route.name == 'entryBook') {
+                        iconName = focused ? require("./icons/active_book.png") : require("./icons/book.png")
 
                     }
                     else if (route.name == 'priceList') {
@@ -73,8 +74,8 @@ const Tabs = () => {
                         title: "Live Price",
                         headerShown: false,
                     }} />
-                    <Tab.Screen name="firebaseData" component={FirebaseData} options={{
-                        title:'Firebase Data',
+                    <Tab.Screen name="entryBook" component={FirebaseData} options={{
+                        title:'Entry Book',
                         headerShown:false
                     }}/>
                 <Tab.Screen name="priceList" component={PriceList} options={{

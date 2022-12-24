@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {View,Text, StatusBar} from 'react-native';
+import {View,Text,Alert} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import database from '@react-native-firebase/database';
+import Buttons from "../Buttons";
 
-const Fetch=()=>{
+const Fetch=(props)=>{
     const [MyData,SetMyData] = useState(null);
     const[RealData,SetMyRealData] = useState(null);
     useEffect(()=>{
@@ -35,6 +36,11 @@ const getRealTimeData =async()=>{
         console.log(error);
     }
 }
+const GoToListScreen=()=>{
+    // return props.navigation.navigate('Fetch_Screen');
+       return props.navigation.navigate('ManageEntries');
+
+}
     return(
         <View style={{flex:1}}>
            {/* <StatusBar hidden/> */}
@@ -43,7 +49,7 @@ const getRealTimeData =async()=>{
             <Text style={{alignSelf:'center'}}>Fruits:{MyData?MyData.fruits.map(l => ` ${l},`):"Loading..."}</Text>
             <View style={{borderBottomWidth:1,  borderBottomColor:'black', width:'100%', marginTop:2}}></View>
             <Text style={{fontSize:20, fontWeight:'bold', alignSelf:'center', color:'red'}}>RealTime data</Text>
-
+            <Buttons functionName={GoToListScreen} btnName={'Manage Entries'} btnColor="orange"></Buttons>
             
 
             
