@@ -68,34 +68,54 @@ export const Styles = (props) => StyleSheet.create({
     },
     MyTxtInput: {
         borderColor: StaticData().AppColor,
-        borderWidth:1,
+        borderWidth: 1,
         width: 240,
         borderRadius: 10
     },
-    deleteBtn:{
-        marginTop:3,
-        marginBottom:3,
-        borderWidth:1,
-        alignSelf:'center',
-        borderColor:'red',
-        paddingVertical:2,
-        marginRight:2,
-        paddingHorizontal:3,
-        borderRadius:4,
+    deleteBtn: {
+        marginTop: 3,
+        marginBottom: 3,
+        borderWidth: 1,
+        alignSelf: 'center',
+        borderColor: 'red',
+        paddingVertical: 2,
+        marginRight: 2,
+        paddingHorizontal: 3,
+        borderRadius: 4,
     },
-    model:{
-        backgroundColor:'white',
-        borderRadius:8,
-        paddingHorizontal:10,
-        paddingVertical:14,
-        shadowColor:'#000',
-        shadowOffset:{
-            width:0,
-            height:2,
+    model: {
+        backgroundColor: 'white',
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        paddingVertical: 14,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
         },
-        shadowOpacity:0.25,
-        shadowRadius:3.84,
-        elevation:5,
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
-  
+    ListModelTextInput: {
+        borderColor: 'orange',
+        borderWidth: 2,
+        borderRadius: 8,
+        marginVertical: 5,
+        height: 100,
+        textAlignVertical: 'top',
+        marginTop: -10,
+    },
+    card: {
+        borderWidth: 1,
+        borderColor: 'white',
+        elevation: 8,
+        borderRadius: 10,
+        paddingHorizontal: 10,
+        marginHorizontal: 10,
+        backgroundColor: 'white',
+        // height: 80,
+        maxHeight:"100%",
+        marginVertical: 5
+    }
 })

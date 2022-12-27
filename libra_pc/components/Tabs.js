@@ -7,6 +7,8 @@ import Dboperation from "./Dboperation";
 import LivePriceList from "./api/LivePriceList";
 import Fetch from "./firebase/Fetch";
 import NestedNav from "./firebase/NestedNav";
+import ListData from "./firebase/ListData";
+import StaticData from "./StaticData";
 
 function PriceCalculator() {
     return (
@@ -22,7 +24,7 @@ function PriceList() {
 function LiveData() {
     return (
         <LivePriceList></LivePriceList>
-    ) 
+    )
 }
 
 
@@ -32,6 +34,12 @@ function FirebaseData() {
     )
 }
 
+function EntryBooks({navigation}) {
+    return (
+        
+        <ListData navigation={navigation}></ListData>
+    )
+}
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
@@ -69,20 +77,23 @@ const Tabs = () => {
                     title: 'Price Calculator',
                     headerShown: false,
                 }} />
-                <Tab.Screen name="livePriceData" component={LiveData}
+                {/* <Tab.Screen name="livePriceData" component={LiveData}
                     options={{
                         title: "Live Price",
                         headerShown: false,
-                    }} />
-                    <Tab.Screen name="entryBook" component={FirebaseData} options={{
-                        title:'Entry Book',
-                        headerShown:false
-                    }}/>
-                <Tab.Screen name="priceList" component={PriceList} options={{
+                    }} /> */}
+                      <Tab.Screen name="priceList" component={PriceList} options={{
                     title: 'Price List',
                     headerShown: false
 
                 }} />
+                <Tab.Screen name="entryBook" component={EntryBooks} options={{
+                    title: 'Manage Entries',
+                    headerTitleStyle: { color: 'white', fontFamily: StaticData().AppFontFamily },
+                    headerStyle: { backgroundColor: 'orange' },
+                    headerTintColor: 'white',
+                }} />
+              
             </Tab.Navigator>
 
         </NavigationContainer>

@@ -30,7 +30,7 @@ const Fetch=(props)=>{
 const getRealTimeData =async()=>{
     try {
         const data = await database().ref('Users/1').once('value');
-        console.log("Realtime data",data);
+        // console.log("Realtime data",data);
         
     } catch (error) {
         console.log(error);
